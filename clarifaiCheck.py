@@ -15,6 +15,7 @@ inputURL    the URL in question as a string"""
     return requests.get(urlToCheck, headers=headers)
 
 
-r = clarifaiCheck("http://cdn.shopify.com/s/files/1/0725/3353/products/butt_lifter_1024x1024.jpg?v=1442187635")
-print(r.status_code)
-print(r.text)
+r = json.loads(clarifaiCheck("http://cdn.shopify.com/s/files/1/0725/3353/products/butt_lifter_1024x1024.jpg?v=1442187635").text)
+
+print(r['results'][0]['result']['tag']['probs'][1]) # prints the probability the image is nsfw likely if higher than 15, almost certain if higher than 85
+
