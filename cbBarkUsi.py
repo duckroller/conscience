@@ -11,11 +11,6 @@ def barkCheck(messageText):
 
     return requests.post('https://partner.bark.us/api/v1/messages', headers=headers, data=data)
 
-r = barkCheck("hey asshole I hope you die")
-print(r.status_code)
-print(r.text)
 
-
-r = barkCheck("hey sweetheart I hope to kiss")
-print(r.status_code)
-print(r.text)
+r = json.loads(barkCheck("hey sweetheart I hope to kiss").text)
+print(r["success"])
