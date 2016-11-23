@@ -3,8 +3,7 @@ import twilio.twiml
 import requests
 import json
 from twilio.rest import TwilioRestClient
-#import sys
-#import os
+
 
 app = Flask(__name__)
 
@@ -27,13 +26,8 @@ def clarifaiCheck(inputURL):
 
     return requests.get(urlToCheck, headers=headers)
 
-#def getNumber():
-#    number = request.values.get('From', None)
-#    return number
-
 @app.route("/", methods=['GET', 'POST'])
-def hello_monkey():
-    #makeCall = False
+def reply():
     number = request.values.get('From', None)
     content = request.values.get('Body', None)
     media = request.values.get('NumMedia', None)
@@ -71,16 +65,15 @@ def hello_monkey():
 
 
     resp = twilio.twiml.Response()
-#    with resp.message(message) as m:
-#        m.media(imageUrl)
     resp.message(message)
     return str(resp)
 
 @app.route("/call", methods=['GET', 'POST'])
 def call():
     resp = twilio.twiml.Response()
+    resp.say("Hey! I'm your conscience, stop being such a terrible person! ")
     for i in range(5):
-        resp.say("Hey, I'm your conscience. Stop being such a terrible person!")
+        resp.say("I repeat! Stop being such a terrible person!")
     return str(resp)
 
 def makeCall(number):
@@ -89,14 +82,11 @@ def makeCall(number):
     auth_token = "64d8aa95c86d2ec9af232a3e8e6e64b4"
     client = TwilioRestClient(account_sid, auth_token)
 
-    #caller = request.values.get("From", None)
-
-    call = client.calls.create(to=number,  # Change it to the caller variable if possible
-                               from_="+13475806502", # Must be a valid Twilio number
+    call = client.calls.create(to=number,
+                               from_="+13475806502",
                                url ="https://5a33675a.ngrok.io/call"
                                )
     print(call.sid)
 
-# Get these credentials from http://twilio.com/user/account
 if __name__ == "__main__":
     app.run(debug=True)
