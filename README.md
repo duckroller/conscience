@@ -4,4 +4,4 @@ Conscience receives and responds to SMS and MMS messages. If the message contain
 
 Contributors: Eli Ramthun, Chau Pham, Minh Vu - WildHacks 2016  
 
-Website: <a href='https://devpost.com/software/conscience'>Devpost</a>   a
+Website: <a href='https://devpost.com/software/conscience'>Devpost</a>
